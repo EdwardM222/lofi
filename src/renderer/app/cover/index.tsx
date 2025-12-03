@@ -208,12 +208,27 @@ export const Cover: FunctionComponent<Props> = ({ settings, message, onVisualiza
     [localVolume, volumeIncrement, changeVolume]
   );
 
+  const ondblClick = useCallback((): void => {
+    console.log('Double clicked');
+    // Add functionality here
+    // Tried opening spotify app but couldn't get it to work
+  }, []);
+
   useEffect(() => {
-    document.getElementById('visible-ui').addEventListener('mousewheel', onMouseWheel);
+    const el = document.getElementById('visible-ui');
+    el.addEventListener('mousewheel', onMouseWheel);
     return () => {
-      document.getElementById('visible-ui').removeEventListener('mousewheel', onMouseWheel);
+      el.removeEventListener('mousewheel', onMouseWheel);
     };
   }, [onMouseWheel]);
+
+  useEffect(() => {
+    const el = document.getElementById('visible-ui');
+    el.addEventListener('dblclick', ondblClick);
+    return () => {
+      el.removeEventListener('dblclick', ondblClick);
+    };
+  }, [ondblClick]);
 
   useEffect(() => {
     const listeningToIntervalId = setInterval(handlePlaybackChanged, trackInfoRefreshTimeInSeconds * ONE_SECOND_IN_MS);
