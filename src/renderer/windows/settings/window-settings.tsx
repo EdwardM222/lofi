@@ -52,7 +52,7 @@ export const WindowSettings: FunctionComponent = () => {
             <Slider
               type="range"
               min={0}
-              max={10}
+              max={15}
               step={1}
               defaultValue={DEFAULT_SETTINGS.showTrackInfoTemporarilyInSeconds}
               {...register('showTrackInfoTemporarilyInSeconds', { required: true, valueAsNumber: true })}

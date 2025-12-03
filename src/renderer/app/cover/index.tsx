@@ -115,10 +115,9 @@ export const Cover: FunctionComponent<Props> = ({ settings, message, onVisualiza
           setCurrentSongId(state.id);
           console.log(`New song '${songTitle}' by '${artist}.`);
           await refreshTrackLiked();
-        }
-
-        if (!isAlwaysShowTrackInfo && showTrackInfoTemporarilyInSeconds) {
+        } else if (!isAlwaysShowTrackInfo && showTrackInfoTemporarilyInSeconds) {
           setShouldShowTrackInfo(true);
+          console.log('Showing track info temporarily.');
 
           const timer = setTimeout(() => {
             if (!document.getElementById('visible-ui')?.matches(':hover')) {
@@ -143,12 +142,12 @@ export const Cover: FunctionComponent<Props> = ({ settings, message, onVisualiza
   ]);
 
   useEffect(() => {
-    return () => {
-      if (trackInfoTimer) {
-        clearTimeout(trackInfoTimer);
-      }
-    };
-  }, [trackInfoTimer]);
+    if (!state.isPlaying && trackInfoTimer) {
+      clearTimeout(trackInfoTimer);
+      setTrackInfoTimer(null);
+      setShouldShowTrackInfo(false);
+    }
+  }, [state.isPlaying, trackInfoTimer]);
 
   const keepAlive = useCallback(async (): Promise<void> => {
     if (state.isPlaying || state.userProfile?.accountType !== AccountType.Premium) {
