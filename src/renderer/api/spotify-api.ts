@@ -119,13 +119,13 @@ class SpotifyApi {
 
   async like(isLiked: boolean, trackId: string): Promise<void> {
     const verb = isLiked ? 'DELETE' : 'PUT';
-    await this.fetch(`/me/tracks?ids=${trackId}`, {
+    await this.fetch(`/me/library?uris=spotify:track:${trackId}`, {
       method: verb,
     });
   }
 
   async isTrackLiked(trackId: string): Promise<boolean> {
-    const likedResponse: Array<boolean> = await this.fetch(`/me/tracks/contains?ids=${trackId}`, {
+    const likedResponse: Array<boolean> = await this.fetch(`/me/library/contains?uris=spotify:track:${trackId}`, {
       method: 'GET',
     });
 
