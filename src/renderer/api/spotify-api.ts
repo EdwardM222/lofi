@@ -74,8 +74,8 @@ class SpotifyApi {
   private refreshToken: string;
 
   async updateTokens(data: AuthData): Promise<SpotifyUserProfile> {
-    this.accessToken = data?.access_token;
-    this.refreshToken = data?.refresh_token;
+    this.accessToken = data?.access_token ?? this.accessToken;
+    this.refreshToken = data?.refresh_token ?? this.refreshToken;
 
     if (!this.accessToken) {
       return null;
