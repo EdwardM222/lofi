@@ -27,11 +27,13 @@ const TrackInfoWrapper = styled.div`
 
 const Track = styled.div`
   font-weight: bold;
+  padding: 0 0.25rem;
 `;
 
 const Artist = styled(Track)`
   font-weight: normal;
   font-size: 90%;
+  padding: 0 0.25rem;
 `;
 
 const MessageWrapper = styled.div`
@@ -76,16 +78,12 @@ export const TrackInfo: FunctionComponent<TrackInfoProps> = ({ track, artist, me
       <Track
         style={{
           textAlign: isOnLeft ? 'start' : 'end',
-          paddingLeft: !isOnLeft && '0.5rem',
-          paddingRight: isOnLeft && '0.5rem',
         }}>
         {track}
       </Track>
       <Artist
         style={{
           textAlign: isOnLeft ? 'start' : 'end',
-          paddingLeft: !isOnLeft && '0.5rem',
-          paddingRight: isOnLeft && '0.5rem',
         }}>
         {artist}
       </Artist>
@@ -93,8 +91,6 @@ export const TrackInfo: FunctionComponent<TrackInfoProps> = ({ track, artist, me
         style={{
           display: message ? 'flex' : 'none',
           justifyContent: isOnLeft ? 'start' : 'end',
-          paddingLeft: !isOnLeft && '0.5rem',
-          paddingRight: isOnLeft && '0.5rem',
         }}>
         <i className="fa fa-warning" />
         <Message>{message}</Message>
